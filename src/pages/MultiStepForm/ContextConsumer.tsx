@@ -61,7 +61,7 @@ const ContextConsumer: React.FC = () => {
         <div className={cn(getProgress(), 'wizard-bar transition-all')}></div>
       </div>
 
-      <pre
+      {/* <pre
         style={{
           position: 'relative',
           zIndex: 1,
@@ -73,7 +73,7 @@ const ContextConsumer: React.FC = () => {
         }}
       >
         {JSON.stringify(restContext, null, 2)}
-      </pre>
+      </pre> */}
     </div>
   )
 }
