@@ -1,69 +1,81 @@
-:root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+@layer base {
+    /* Chrome, Safari, Edge, Opera */
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
 
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-text-size-adjust: 100%;
-}
-
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
+    /* Firefox */
+    input[type=number] {
+        -moz-appearance: textfield;
+    }
 }
 
-body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
-}
+@layer components {
+    .bg-custom {
+        
+        background: rgb(89,173,42);
+        background: linear-gradient(90deg, rgba(89,173,42,1) 0%, rgba(57,199,66,1) 0%, rgba(7,151,152,1) 100%);
+    }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-}
+    .bg-banner {
+        background-image: url('https://images.pexels.com/photos/7613568/pexels-photo-7613568.jpeg'), linear-gradient(rgba(0,0,0,0.3),rgba(0,0,0,0.3));
+        background-blend-mode: overlay;
+        background-size: cover;
+    }
 
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
+    .text-custom {
+        background: #04CF77;
+        background: linear-gradient(to right, #04CF77 0%, #2580CF 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        display: block;
+        min-height: 105px;
+    }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
+    .wizard-container {
+        position: absolute;
+        bottom: 2.5rem;
+        left: 50%;
+        transform: translateX(-50%)
+    }
+
+    .wizard-bar {
+        height: 6px;
+        width: 100%;
+        background: linear-gradient(to right, #04CF77 0%, #2580CF 100%);
+    }
+
+    .wizard-bar::before {
+        content: '';
+        position: absolute;
+        left: 1.25rem;
+        right: 1.25rem;
+        height: 6px;
+        z-index: -1;
+        background: #ccc;
+
+    }
+
+    .wizard-button-container {
+        position: absolute;
+        top: 50%;
+        left: 0;
+        right: 0;
+        transform: translateY(-50%);
+        width: 100%;
+    }
+
+    .wizard-button-container b {
+        width: 15px;
+        height: 15px;
+        border-radius: 50%;
+        background: white;
+    }
+
 }
