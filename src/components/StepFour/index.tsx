@@ -20,14 +20,10 @@ const StepFour: React.FC = () => {
 
   const mappedSelectedDishes = Object.entries(selectedDishes ?? {})?.map(
     ([, { id, label, servings }]) => (
-      <div className='flex justify-between w-full'>
-        <span className='w-full text-zinc-500' key={id}>
-          {label}
-        </span>
-        <span className='w-[50px] text-zinc-500 text-right' key={id}>
-          x {servings}
-        </span>
-      </div>
+      <span className='flex justify-between w-full' key={id}>
+        <span className='w-full text-zinc-500'>{label}</span>
+        <span className='w-[50px] text-zinc-500 text-right'>x {servings}</span>
+      </span>
     )
   )
 

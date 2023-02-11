@@ -22,6 +22,7 @@ const StyledInput: React.FC<StyledInputProps> = ({
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     if (!rest?.max && !rest?.min && Number(event.target.value) >= 0) {
       setInputValue(parseInt(event.target.value))
+      handleChange(parseInt(event.target.value))
       return
     }
 
@@ -32,32 +33,39 @@ const StyledInput: React.FC<StyledInputProps> = ({
       parseInt(event.target.value) >= rest?.min
     ) {
       setInputValue(parseInt(event.target.value))
+      handleChange(parseInt(event.target.value))
     }
   }
 
   const handleIncrement = () => {
     if (!rest?.max) {
       setInputValue(Number(inputValue) + 1)
+      handleChange(Number(inputValue) + 1)
       return
     }
 
-    inputValue < rest?.max && setInputValue(Number(inputValue) + 1)
+    if (inputValue < rest?.max) {
+      setInputValue(Number(inputValue) + 1)
+      handleChange(Number(inputValue) + 1)
+    }
   }
 
   const handleDecrement = () => {
     if (!rest?.min) {
       inputValue > 0 && setInputValue(Number(inputValue) - 1)
+      handleChange(Number(inputValue) - 1)
       return
     }
 
-    inputValue > rest?.min && setInputValue(Number(inputValue) - 1)
+    if (inputValue > rest?.min) {
+      setInputValue(Number(inputValue) - 1)
+      handleChange(Number(inputValue) - 1)
+    }
   }
 
   useEffect(() => {
-    handleChange(inputValue)
-
-    console.log(inputValue, 'inputValuerowDeleteComponent')
-  }, [inputValue])
+    setInputValue(value)
+  }, [value])
 
   return (
     <div className={cn(className, 'flex items-center gap-2')}>

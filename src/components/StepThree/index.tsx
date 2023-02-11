@@ -53,6 +53,7 @@ const StepThree: React.FC = () => {
   }
 
   const handleServingsChange = ({ servings = 0, ...rest }: Dish) => {
+    console.log('debug servings', servings)
     handleSetNumberOfServings({
       ...rest,
       servings,
@@ -63,10 +64,10 @@ const StepThree: React.FC = () => {
     const dishes = Object.entries(selectedDishes ?? {})?.length ? (
       Object.entries(selectedDishes ?? {})?.map(
         ([, selectedDish], index: number) => {
-          const { id, value, servings } = selectedDish
+          const { id, value, servings, rowIndex } = selectedDish
 
           return (
-            <div className='flex items-center gap-4 mb-3' key={id}>
+            <div className='flex items-center gap-4 mb-3' key={index}>
               <StyledDropdown
                 value={selectedDish}
                 className='w-9/12'
@@ -144,8 +145,6 @@ const StepThree: React.FC = () => {
         />
       </div>
     )
-
-    console.log(rowDeleteComponent, 'rowDeleteComponentrowDeleteComponent')
 
     setMappedSelectedDishes(dishes)
   }, [selectedDishes, dishOptions, rowDeleteComponent])

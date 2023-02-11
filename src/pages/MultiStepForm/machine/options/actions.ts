@@ -121,14 +121,11 @@ export const actions: ActionFunctionMap<Context, MachineEvents | any> = {
 
   assignDish: assign({
     selectedDishes: ({ selectedDishes = {} }, { payload }: SelectDishEvent) => {
-      const { id, rowIndex } = payload ?? {}
+      const { rowIndex } = payload ?? {}
+
+      console.log('debug ASSIGN DISH', payload)
 
       let restOfDishes = selectedDishes
-
-      // if (selectedDishes[id]) {
-      //   console.log('debug EXISTING SELECTED ALREADY! DISH', id)
-      //   return restOfDishes
-      // }
 
       if (selectedDishes['pending']) {
         const { ['pending']: removed, ...rest } = selectedDishes
