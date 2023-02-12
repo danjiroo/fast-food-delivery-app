@@ -1,3 +1,4 @@
+/* eslint-disable indent */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
@@ -89,15 +90,12 @@ export const actions: ActionFunctionMap<Context, MachineEvents | any> = {
     selectedRestaurant: (_, { payload }: SelectRestaurantEvent) =>
       payload.value,
     selectedDishes: (
-      { selectedRestaurant, selectedDishes = {} },
+      { selectedRestaurant, selectedDishes = [] },
       { payload }: SelectRestaurantEvent
     ) => {
       // clicking previous, if restaurant is change and has already selected a restaurant
-      if (
-        Object.keys(selectedDishes)?.length &&
-        selectedRestaurant !== payload.value
-      ) {
-        return {}
+      if (selectedDishes?.length && selectedRestaurant !== payload.value) {
+        return []
       }
 
       return selectedDishes
@@ -120,35 +118,58 @@ export const actions: ActionFunctionMap<Context, MachineEvents | any> = {
   }),
 
   assignDish: assign({
-    selectedDishes: ({ selectedDishes = {} }, { payload }: SelectDishEvent) => {
-      const { rowIndex } = payload ?? {}
+    selectedDishes: ({ selectedDishes = [] }, { payload }: SelectDishEvent) => {
+      const { id } = payload ?? {}
 
-      console.log('debug ASSIGN DISH', payload)
+      const hasPendingDish =
+        selectedDishes[selectedDishes?.length - 1]?.id === 0
 
-      let restOfDishes = selectedDishes
+      if (hasPendingDish) {
+        const updatedDishes = selectedDishes?.map((dish) => {
+          if (dish.id === 0) {
+            return {
+              ...dish,
+              ...payload,
+              servings: 1,
+            }
+          }
 
-      if (selectedDishes['pending']) {
-        const { ['pending']: removed, ...rest } = selectedDishes
-        restOfDishes = rest ?? {}
+          return dish
+        })
+
+        return updatedDishes ?? []
       }
 
-      return {
-        ...restOfDishes,
-        [rowIndex]: {
-          ...payload,
-          servings: 1,
-        },
-      }
+      const updatedDishes = selectedDishes?.length
+        ? selectedDishes?.map((dish, index) => {
+            if (index === payload.index) {
+              return {
+                ...payload,
+                servings: 1,
+              }
+            }
+
+            return dish
+          })
+        : [
+            ...selectedDishes,
+            {
+              ...payload,
+              servings: 1,
+            },
+          ]
+
+      return updatedDishes
     },
 
     options: (
-      { items = [], options, selectedDishes = {} },
+      { items = [], options, selectedDishes = [] },
       { payload }: SelectDishEvent
     ) => {
-      const { rowIndex } = payload ?? {}
+      const { id } = payload ?? {}
       const { dishOptions = [] } = options ?? {}
 
-      const currentDish = selectedDishes[rowIndex]
+      const currentDish = selectedDishes[payload.index]
 
       const reAddOption = items.find((item) => item.id === currentDish?.id)
 
@@ -168,22 +189,22 @@ export const actions: ActionFunctionMap<Context, MachineEvents | any> = {
   }),
 
   removeDish: assign({
-    selectedDishes: ({ selectedDishes = {} }, { payload }: SelectDishEvent) => {
-      const { rowIndex } = payload ?? {}
+    selectedDishes: ({ selectedDishes = [] }, { payload }: SelectDishEvent) => {
+      const { id } = payload ?? {}
 
-      const { [rowIndex]: removed, ...rest } = selectedDishes
+      const updatedDishes = selectedDishes?.filter((dish) => dish.id !== id)
 
-      return rest ?? {}
+      return updatedDishes ?? []
     },
 
     options: (
-      { items = [], options, selectedDishes = {} },
+      { items = [], options, selectedDishes = [] },
       { payload }: SelectDishEvent
     ) => {
-      const { rowIndex } = payload ?? {}
+      const { id } = payload ?? {}
       const { dishOptions = [] } = options ?? {}
 
-      const currentDish = selectedDishes[rowIndex]
+      const currentDish = selectedDishes?.find((dish) => dish.id === id)
 
       const reAddOption = items.find((item) => item.id === currentDish?.id)
 
@@ -204,27 +225,39 @@ export const actions: ActionFunctionMap<Context, MachineEvents | any> = {
 
   assignServings: assign({
     selectedDishes: (
-      { selectedDishes = {} },
+      { selectedDishes = [] },
       { payload }: SetNumberOfServings
-    ) => ({
-      ...selectedDishes,
-      [payload.rowIndex]: {
-        ...selectedDishes[payload.rowIndex],
-        servings: payload.servings,
-      },
-    }),
+    ) => {
+      const { id } = payload
+
+      const updatedDishes = selectedDishes?.map((dish) => {
+        if (dish.id === id) {
+          return payload
+        }
+
+        return dish
+      })
+
+      return updatedDishes ?? []
+    },
   }),
 
   addDishSelector: assign({
-    selectedDishes: ({ selectedDishes = {} }) => ({
-      ...selectedDishes,
-      pending: {
-        id: 0,
-        label: 'Select an option',
-        value: '',
-        servings: 0,
-        rowIndex: '',
-      },
-    }),
+    selectedDishes: ({ selectedDishes = [] }) => {
+      const hasPendingDish =
+        selectedDishes[selectedDishes?.length - 1]?.id === 0
+
+      if (hasPendingDish) return selectedDishes
+
+      return [
+        ...selectedDishes,
+        {
+          id: 0,
+          label: 'Select an option',
+          value: '',
+          servings: 0,
+        },
+      ]
+    },
   }),
 }

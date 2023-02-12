@@ -13,9 +13,7 @@ interface Option {
 
 export const formatSelectOptions = (options: string[] | Option[]) =>
   options?.map((option) => {
-    console.log('typeof option', typeof option)
     if (typeof option == 'object') {
-      console.log('IS OBJHECT', option)
       return {
         id: option.id,
         label: capFirstLetterForEachWord(option.name),

@@ -33,8 +33,6 @@ const MultiStepFormProvider: React.FC<PropsWithChildren> = ({ children }) => {
 
   if (!state) return null
 
-  console.log('@state', JSON.stringify(state.context.selectedDishes, null, 2))
-
   const actions: ActionsProps = {
     handleNext: () => send('NEXT'),
     handlePrev: () => send('PREV'),

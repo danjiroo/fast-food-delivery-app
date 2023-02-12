@@ -54,7 +54,10 @@ const ContextConsumer: React.FC = () => {
       {providerState.matches('ready.step_three') && <StepThree />}
       {providerState.matches('ready.step_four') && <StepFour />}
 
-      <div className='wizard-container w-full p-5 xl:w-3/4' id='app'>
+      <div
+        className='wizard-container w-full p-5 xl:w-3/4 bottom-[5rem] sm:bottom-[2.5rem]'
+        id='app'
+      >
         <div className='wizard-button-container flex justify-between p-5'>
           {mappedWizardButtons}
         </div>
@@ -72,7 +75,14 @@ const ContextConsumer: React.FC = () => {
           padding: '1rem',
         }}
       >
-        {JSON.stringify(restContext, null, 2)}
+        {JSON.stringify(
+          {
+            selectedDishes: restContext.selectedDishes,
+            dishOptions: restContext?.options?.dishOptions,
+          },
+          null,
+          2
+        )}
       </pre> */}
     </div>
   )

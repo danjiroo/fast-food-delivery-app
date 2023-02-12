@@ -25,15 +25,11 @@ export interface SelectRestaurantEvent {
 
 export interface SelectDishEvent {
   type: 'SELECT_DISH'
-  payload: Dish & {
-    rowIndex: string
-  }
+  payload: Dish & { index: number }
 }
 export interface RemoveDishEvent {
   type: 'REMOVE_DISH'
-  payload: Dish & {
-    rowIndex: string
-  }
+  payload: Dish
 }
 
 export interface SetNumberOfServings {

@@ -5,7 +5,7 @@ interface StyledButtonProps
   extends PropsWithChildren,
     HTMLProps<HTMLButtonElement> {
   iconPosition?: 'left' | 'right'
-  iconName?: 'arrow-right' | 'arrow-left' | 'plus' | 'check' | 'x'
+  iconName?: 'arrow-right' | 'arrow-left' | 'plus' | 'check' | 'x' | 'trash'
 }
 
 const StyledButton: React.FC<StyledButtonProps> = ({
@@ -80,15 +80,21 @@ const StyledButton: React.FC<StyledButtonProps> = ({
     )}
 
     {iconName === 'x' && (
-      <svg
-        className='w-5 h-5 ml-0 group-hover:-ml-1 group-focus:-ml-1 transition-all'
-        fill='none'
-        viewBox='0 0 24 24'
-      >
+      <svg className='w-5 h-5 mr-2 ' fill='none' viewBox='0 0 24 24'>
         <path
           fill='currentColor'
           d='M6.225 4.811a1 1 0 00-1.414 1.414L10.586 12 4.81 17.775a1 1 0 101.414 1.414L12 13.414l5.775 5.775a1 1 0 001.414-1.414L13.414 12l5.775-5.775a1 1 0 00-1.414-1.414L12 10.586 6.225 4.81z'
         />
+      </svg>
+    )}
+
+    {iconName === 'trash' && (
+      <svg
+        className='w-5 h-5 ml-0 group-hover:-ml-1 group-focus:-ml-1 transition-all'
+        viewBox='0 0 16 16'
+        fill='currentColor'
+      >
+        <path d='M2.5 1a1 1 0 00-1 1v1a1 1 0 001 1H3v9a2 2 0 002 2h6a2 2 0 002-2V4h.5a1 1 0 001-1V2a1 1 0 00-1-1H10a1 1 0 00-1-1H7a1 1 0 00-1 1H2.5zm3 4a.5.5 0 01.5.5v7a.5.5 0 01-1 0v-7a.5.5 0 01.5-.5zM8 5a.5.5 0 01.5.5v7a.5.5 0 01-1 0v-7A.5.5 0 018 5zm3 .5v7a.5.5 0 01-1 0v-7a.5.5 0 011 0z' />
       </svg>
     )}
 

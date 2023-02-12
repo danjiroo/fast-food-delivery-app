@@ -31,7 +31,6 @@ const StepOne: React.FC = () => {
   }
 
   const handleNumberOfPeopleChange = (input: number | string) => {
-    console.log('input', input)
     handleSetNumberOfPeople(input)
   }
 

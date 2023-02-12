@@ -19,7 +19,6 @@ export interface DishOption {
 
 export interface Dish extends DishOption {
   servings: number
-  rowIndex: string
 }
 
 export interface Context {
@@ -28,5 +27,5 @@ export interface Context {
   selectedNumberOfPeople?: number
   selectedMeal?: string
   selectedRestaurant?: string
-  selectedDishes?: Record<string, Dish>
+  selectedDishes?: Dish[]
 }

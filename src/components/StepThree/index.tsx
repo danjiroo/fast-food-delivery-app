@@ -17,7 +17,7 @@ import { formatSelectOptions } from '../../utils'
 import { Dish } from '../../pages/MultiStepForm/machine'
 
 interface DeleteComponent {
-  rowIndex: string
+  id: number
   showDeleteComponent: boolean
 }
 
@@ -48,12 +48,11 @@ const StepThree: React.FC = () => {
     handleRemoveDish,
   } = providerActions
 
-  const handleDishChange = (selectedOption: Option & { rowIndex: string }) => {
+  const handleDishChange = (selectedOption: Option & { index: number }) => {
     handleSelectDish(selectedOption)
   }
 
-  const handleServingsChange = ({ servings = 0, ...rest }: Dish) => {
-    console.log('debug servings', servings)
+  const handleServingsChange = ({ servings = 1, ...rest }: Dish) => {
     handleSetNumberOfServings({
       ...rest,
       servings,
@@ -61,86 +60,86 @@ const StepThree: React.FC = () => {
   }
 
   useEffect(() => {
-    const dishes = Object.entries(selectedDishes ?? {})?.length ? (
-      Object.entries(selectedDishes ?? {})?.map(
-        ([, selectedDish], index: number) => {
-          const { id, value, servings, rowIndex } = selectedDish
+    const dishes = selectedDishes?.length ? (
+      selectedDishes.map((selectedDish, index) => {
+        const { id, value, servings } = selectedDish
 
-          return (
-            <div className='flex items-center gap-4 mb-3' key={index}>
-              <StyledDropdown
-                value={selectedDish}
-                className='w-9/12'
-                options={formatSelectOptions(dishOptions)}
-                onChange={(selectedOption) =>
-                  handleDishChange({
-                    ...selectedOption,
-                    rowIndex: `row:${index}`,
-                  })
-                }
+        return (
+          <div
+            className='flex items-center justify-between gap-4 mb-3'
+            key={id}
+          >
+            <StyledDropdown
+              value={selectedDish}
+              className='w-7/12'
+              options={formatSelectOptions(dishOptions)}
+              onChange={(selectedOption) =>
+                handleDishChange({ ...selectedOption, index })
+              }
+            />
+
+            {!rowDeleteComponent[selectedDish?.id]?.showDeleteComponent ? (
+              <StyledInput
+                name={value}
+                type='number'
+                value={servings}
+                disabled={!value}
+                handleChange={(servings) => {
+                  if (servings === 0) {
+                    setRowDeleteComponent((prev) => ({
+                      ...prev,
+                      [selectedDish?.id]: {
+                        id: selectedDish?.id,
+                        showDeleteComponent: true,
+                      },
+                    }))
+                  }
+
+                  handleServingsChange({ ...selectedDish, servings })
+                }}
               />
+            ) : (
+              <div className='flex gap-2 w-[180px] justify-end'>
+                <StyledButton
+                  iconName='trash'
+                  className='bg-red-400 hover:bg-red-500'
+                  onClick={() => {
+                    const { [selectedDish?.id]: removed, ...rest } =
+                      rowDeleteComponent
 
-              {!rowDeleteComponent[selectedDish?.rowIndex]
-                ?.showDeleteComponent ? (
-                <StyledInput
-                  name={value}
-                  type='number'
-                  value={servings}
-                  handleChange={(servings) => {
-                    console.log('servings!!!rowDeleteComponent', servings)
-                    if (servings === 0) {
-                      setRowDeleteComponent((prev) => ({
-                        ...prev,
-                        [selectedDish?.rowIndex]: {
-                          rowIndex: selectedDish?.rowIndex,
-                          showDeleteComponent: true,
-                        },
-                      }))
-                    }
-
-                    handleServingsChange({ ...selectedDish, servings })
+                    handleRemoveDish(selectedDish)
+                    setRowDeleteComponent(rest ?? {})
                   }}
                 />
-              ) : (
-                <div className='flex gap-3'>
-                  <StyledButton
-                    iconName='check'
-                    className='bg-red-400 hover:bg-red-500'
-                    onClick={() => {
-                      const { [selectedDish?.rowIndex]: removed, ...rest } =
-                        rowDeleteComponent
+                <StyledButton
+                  iconName='x'
+                  iconPosition='left'
+                  onClick={() => {
+                    setRowDeleteComponent((prev) => ({
+                      ...prev,
+                      [selectedDish?.id]: {
+                        ...prev[selectedDish?.id],
+                        showDeleteComponent: false,
+                      },
+                    }))
 
-                      handleRemoveDish(selectedDish)
-                      setRowDeleteComponent(rest ?? {})
-                    }}
-                  />
-                  <StyledButton
-                    iconName='x'
-                    onClick={() => {
-                      setRowDeleteComponent((prev) => ({
-                        ...prev,
-                        [selectedDish?.rowIndex]: {
-                          ...prev[selectedDish?.rowIndex],
-                          showDeleteComponent: false,
-                        },
-                      }))
-
-                      handleServingsChange({ ...selectedDish, servings: 1 })
-                    }}
-                  />
-                </div>
-              )}
-            </div>
-          )
-        }
-      )
+                    handleServingsChange({ ...selectedDish, servings: 1 })
+                  }}
+                >
+                  Cancel
+                </StyledButton>
+              </div>
+            )}
+          </div>
+        )
+      })
     ) : (
       <div className='flex items-center gap-4'>
         <StyledDropdown
           className='w-full'
           options={formatSelectOptions(dishOptions)}
           onChange={(selectedOption) =>
-            handleDishChange({ ...selectedOption, rowIndex: 'row:0' })
+            handleDishChange({ ...selectedOption, index: 0 })
           }
         />
       </div>
@@ -169,7 +168,7 @@ const StepThree: React.FC = () => {
             Please Select a Dish
           </StyledParagraph>
 
-          {mappedSelectedDishes}
+          <div className='custom-scrollbar pr-2'>{mappedSelectedDishes}</div>
         </div>
 
         {dishOptions?.length ? (

@@ -38,6 +38,8 @@ const StyledInput: React.FC<StyledInputProps> = ({
   }
 
   const handleIncrement = () => {
+    if (rest.disabled) return
+
     if (!rest?.max) {
       setInputValue(Number(inputValue) + 1)
       handleChange(Number(inputValue) + 1)
@@ -51,9 +53,11 @@ const StyledInput: React.FC<StyledInputProps> = ({
   }
 
   const handleDecrement = () => {
+    if (rest.disabled) return
+
     if (!rest?.min) {
       inputValue > 0 && setInputValue(Number(inputValue) - 1)
-      handleChange(Number(inputValue) - 1)
+      inputValue > 0 && handleChange(Number(inputValue) - 1)
       return
     }
 
@@ -72,8 +76,12 @@ const StyledInput: React.FC<StyledInputProps> = ({
       {type === 'number' && (
         <svg
           viewBox='0 0 1024 1024'
-          fill='gray'
-          className='cursor-pointer h-[2.3em] w-[40px] hover:fill-green-300 hover:border-green-300 border-2 rounded-lg transition-all'
+          fill={`${rest.disabled ? '#ddd' : 'gray'}`}
+          className={`cursor-pointer h-[2.3em] w-[40px] hover:fill-green-300 hover:border-green-300 border-2 rounded-lg transition-all ${
+            rest.disabled
+              ? 'border-gray-100 fill-gray-100 hover:fill-gray-100  hover:border-gray-100'
+              : ''
+          }`}
           onClick={handleDecrement}
         >
           <path d='M872 474H152c-4.4 0-8 3.6-8 8v60c0 4.4 3.6 8 8 8h720c4.4 0 8-3.6 8-8v-60c0-4.4-3.6-8-8-8z' />
@@ -84,14 +92,22 @@ const StyledInput: React.FC<StyledInputProps> = ({
         placeholder={placeholder}
         value={inputValue}
         onChange={handleInputChange}
-        className='px-4 py-2 w-[50px] text-center rounded-lg border border-gray-400 bg-white text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
+        className={`px-4 py-2 w-[50px] text-center rounded-lg border border-gray-400 bg-white leading-tight focus:outline-none focus:shadow-outline ${
+          rest.disabled
+            ? 'border-gray-100 text-gray-200'
+            : 'border-gray-400 text-gray-700 '
+        }`}
         {...rest}
       />
       {type === 'number' && (
         <svg
-          fill='gray'
+          fill={`${rest.disabled ? '#ddd' : 'gray'}`}
           viewBox='0 0 16 16'
-          className='cursor-pointer h-[2.3em] w-[40px] hover:fill-green-300 hover:border-green-300 border-2 rounded-lg transition-all'
+          className={`cursor-pointer h-[2.3em] w-[40px] hover:fill-green-300 hover:border-green-300 border-2 rounded-lg transition-all ${
+            rest.disabled
+              ? 'border-gray-100 fill-gray-100 hover:fill-gray-100  hover:border-gray-100'
+              : ''
+          }`}
           onClick={handleIncrement}
         >
           <path d='M8 4a.5.5 0 01.5.5v3h3a.5.5 0 010 1h-3v3a.5.5 0 01-1 0v-3h-3a.5.5 0 010-1h3v-3A.5.5 0 018 4z' />
