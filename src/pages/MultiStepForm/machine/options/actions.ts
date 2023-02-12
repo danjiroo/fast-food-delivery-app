@@ -242,6 +242,12 @@ export const actions: ActionFunctionMap<Context, MachineEvents | any> = {
     },
   }),
 
+  trimSelectedDishes: assign({
+    selectedDishes: ({ selectedDishes = [] }) =>
+      // dish.id === 0
+      selectedDishes?.filter((dish) => dish.label !== 'Select an option') ?? [],
+  }),
+
   addDishSelector: assign({
     selectedDishes: ({ selectedDishes = [] }) => {
       const hasPendingDish =

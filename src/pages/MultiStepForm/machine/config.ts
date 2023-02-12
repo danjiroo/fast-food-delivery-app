@@ -51,7 +51,10 @@ export const config: MachineConfig<Context, StateSchema, MachineEvents> = {
         step_three: {
           id: 'step_three',
           on: {
-            NEXT: '#step_four',
+            NEXT: {
+              actions: ['trimSelectedDishes'],
+              target: '#step_four',
+            },
             PREV: '#step_two',
             UPDATE_DISH_OPTIONS: {
               actions: ['assignDishOptions'],
