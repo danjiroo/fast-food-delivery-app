@@ -304,6 +304,14 @@ export const actions: ActionFunctionMap<Context, MachineEvents | any> = {
     }),
   }),
 
+  assignNoSelectedNumberOfPeople: assign({
+    errorFields: ({ errorFields }) => ({
+      ...errorFields,
+      error: true,
+      errorText: 'Number of people required.',
+    }),
+  }),
+
   assignNoSelectedRestaurantError: assign({
     errorFields: ({ errorFields }) => ({
       ...errorFields,

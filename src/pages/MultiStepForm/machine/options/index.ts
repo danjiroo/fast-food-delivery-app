@@ -11,6 +11,8 @@ export const options: MachineOptions<Context, any> = {
   delays: {},
   guards: {
     noSelectedMeal: ({ selectedMeal }: Context) => !selectedMeal,
+    noSelectedNumberOfPeople: ({ selectedNumberOfPeople = 0 }) =>
+      selectedNumberOfPeople <= 0,
     maxPeopleReached: (_, { payload }: SetNumberOfPeopleEvent) => payload > 10,
     noSelectedRestaurant: ({ selectedRestaurant }: Context) =>
       !selectedRestaurant,

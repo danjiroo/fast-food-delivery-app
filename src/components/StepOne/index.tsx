@@ -70,7 +70,7 @@ const StepOne: React.FC = () => {
           <StyledInput
             name='numberOfPeople'
             type='number'
-            value={selectedNumberOfPeople}
+            value={selectedNumberOfPeople ?? 1}
             disabled={selectedNumberOfPeople > 10}
             handleChange={handleNumberOfPeopleChange}
             min={1}

@@ -37,7 +37,7 @@ const StyledWizard: React.FC<WizardProps> = ({ stateValue }) => {
 
   return (
     <div
-      className='wizard-container w-full p-5 top-[5.5rem] md:top-[unset] md:bottom-[3rem] xl:w-3/4'
+      className='wizard-container w-full p-5 bottom-[2rem] md:bottom-[3rem] xl:w-3/4'
       id='app'
     >
       <div className='wizard-button-container flex justify-between p-5'>

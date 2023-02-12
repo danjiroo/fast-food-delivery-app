@@ -26,12 +26,7 @@ const StyledInput: React.FC<StyledInputProps> = ({
       return
     }
 
-    if (
-      rest?.max &&
-      rest?.min &&
-      parseInt(event.target.value) <= rest?.max &&
-      parseInt(event.target.value) >= rest?.min
-    ) {
+    if (rest?.max && rest?.min && parseInt(event.target.value) <= rest?.max) {
       setInputValue(parseInt(event.target.value))
       handleChange(parseInt(event.target.value))
     }

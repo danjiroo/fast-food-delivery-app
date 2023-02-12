@@ -33,6 +33,10 @@ export const config: MachineConfig<Context, StateSchema, MachineEvents> = {
                 actions: ['assignNoSelectedMealError'],
               },
               {
+                cond: 'noSelectedNumberOfPeople',
+                actions: ['assignNoSelectedNumberOfPeople'],
+              },
+              {
                 target: '#step_two',
               },
             ],
