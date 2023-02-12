@@ -24,7 +24,9 @@ const ContextConsumer: React.FC = () => {
 
   return (
     <div className='h-full relative flex left justify-center w-full md:w-1/2 md:items-center'>
-      <StyledWizard stateValue={JSON.stringify(providerState?.value)} />
+      {!providerState.matches('order_completed') ? (
+        <StyledWizard stateValue={JSON.stringify(providerState?.value)} />
+      ) : null}
 
       {providerState.matches('loading') && 'Loading...'}
       {providerState.matches('ready.step_one') && <StepOne />}
