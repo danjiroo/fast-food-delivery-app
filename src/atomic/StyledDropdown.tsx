@@ -47,7 +47,7 @@ const StyledDropdown: React.FC<StyledDropdownProps> = ({
         value,
       })
     }
-  }, [value])
+  }, [value, selectedOption])
 
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {

@@ -119,13 +119,11 @@ export const actions: ActionFunctionMap<Context, MachineEvents | any> = {
 
   assignDish: assign({
     selectedDishes: ({ selectedDishes = [] }, { payload }: SelectDishEvent) => {
-      const { id } = payload ?? {}
-
       const hasPendingDish =
         selectedDishes[selectedDishes?.length - 1]?.id === 0
 
       if (hasPendingDish) {
-        const updatedDishes = selectedDishes?.map((dish) => {
+        selectedDishes?.forEach((dish) => {
           if (dish.id === 0) {
             return {
               ...dish,
@@ -133,11 +131,7 @@ export const actions: ActionFunctionMap<Context, MachineEvents | any> = {
               servings: 1,
             }
           }
-
-          return dish
         })
-
-        return updatedDishes ?? []
       }
 
       const updatedDishes = selectedDishes?.length
