@@ -42,6 +42,7 @@ const StepTwo: React.FC = () => {
           Then look no further!
         </StyledParagraph>
       </div>
+
       <div className='mt-8 flex mb-5 lg:mt-12'>
         <div className='w-full xl:w-full'>
           <StyledParagraph className='text-zinc-400 mb-2 text-ellipsis overflow-hidden whitespace-nowrap'>

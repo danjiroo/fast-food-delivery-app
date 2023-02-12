@@ -10,6 +10,7 @@ import {
   ItemsLoadedEvent,
   MachineEvents,
   SelectDishEvent,
+  SelectedDishViewTypeEvent,
   SelectMealEvent,
   SelectRestaurantEvent,
   SetNumberOfPeopleEvent,
@@ -89,10 +90,7 @@ export const actions: ActionFunctionMap<Context, MachineEvents | any> = {
   }),
 
   assignNumberOfPeople: assign({
-    selectedNumberOfPeople: (_, { payload }: SetNumberOfPeopleEvent) => {
-      console.log('Set number of people:', payload)
-      return payload
-    },
+    selectedNumberOfPeople: (_, { payload }: SetNumberOfPeopleEvent) => payload,
     errorFields: ({ errorFields }) => ({
       ...errorFields,
       error: false,
@@ -328,6 +326,11 @@ export const actions: ActionFunctionMap<Context, MachineEvents | any> = {
       error: true,
       errorText: `Not enough dish for ${selectedNumberOfPeople} people.`,
     }),
+  }),
+
+  assignDishViewType: assign({
+    selectedDishesViewType: ({}, { payload }: SelectedDishViewTypeEvent) =>
+      payload,
   }),
 
   resetContext: assign({

@@ -39,4 +39,5 @@ export interface Context {
   //   [P in ErrorSlots]: Error
   // }>
   errorFields?: Error
+  selectedDishesViewType: 'list' | 'grid'
 }

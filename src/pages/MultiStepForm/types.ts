@@ -18,6 +18,7 @@ export interface ActionsProps {
   handleUpdateRestaurantOptions: (options: string[]) => void
   handleUpdateDishOptions: (options: Pick<Item, 'id' | 'name'>[]) => void
   handleRemoveDish: (option: Option) => void
+  handleChangeDishViewType: (type: 'list' | 'grid') => void
 }
 
 export type MultiStepFormStateType = {

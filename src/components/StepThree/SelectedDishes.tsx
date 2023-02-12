@@ -41,18 +41,22 @@ const SelectedDishes: React.FC = () => {
     })
   }
 
+  const dishProps = {
+    dishOptions,
+    rowDeleteComponent,
+    handleRemoveDish,
+    handleDishChange,
+    handleServingsChange,
+    setRowDeleteComponent,
+  }
+
   const mappedSelectedDishes = selectedDishes?.length ? (
     selectedDishes.map((selectedDish, index) => (
       <SelectedDish
         index={index}
         key={selectedDish?.id}
         selectedDish={selectedDish}
-        dishOptions={dishOptions}
-        rowDeleteComponent={rowDeleteComponent}
-        handleRemoveDish={handleRemoveDish}
-        handleDishChange={handleDishChange}
-        handleServingsChange={handleServingsChange}
-        setRowDeleteComponent={setRowDeleteComponent}
+        {...dishProps}
       />
     ))
   ) : (

@@ -6,7 +6,15 @@ interface StyledButtonProps
     HTMLProps<HTMLButtonElement> {
   iconPosition?: 'left' | 'right'
   outline?: 'solid' | 'outline'
-  iconName?: 'arrow-right' | 'arrow-left' | 'plus' | 'check' | 'x' | 'trash'
+  iconName?:
+    | 'arrow-right'
+    | 'arrow-left'
+    | 'plus'
+    | 'check'
+    | 'x'
+    | 'trash'
+    | 'grid'
+    | 'list'
 }
 
 const StyledButton: React.FC<StyledButtonProps> = ({
@@ -101,6 +109,26 @@ const StyledButton: React.FC<StyledButtonProps> = ({
         fill='currentColor'
       >
         <path d='M2.5 1a1 1 0 00-1 1v1a1 1 0 001 1H3v9a2 2 0 002 2h6a2 2 0 002-2V4h.5a1 1 0 001-1V2a1 1 0 00-1-1H10a1 1 0 00-1-1H7a1 1 0 00-1 1H2.5zm3 4a.5.5 0 01.5.5v7a.5.5 0 01-1 0v-7a.5.5 0 01.5-.5zM8 5a.5.5 0 01.5.5v7a.5.5 0 01-1 0v-7A.5.5 0 018 5zm3 .5v7a.5.5 0 01-1 0v-7a.5.5 0 011 0z' />
+      </svg>
+    )}
+
+    {iconName === 'grid' && (
+      <svg
+        className='w-5 h-5 ml-0 group-hover:-ml-1 group-focus:-ml-1 transition-all'
+        fill='currentColor'
+        viewBox='0 0 16 16'
+      >
+        <path d='M1 2.5A1.5 1.5 0 012.5 1h3A1.5 1.5 0 017 2.5v3A1.5 1.5 0 015.5 7h-3A1.5 1.5 0 011 5.5v-3zm8 0A1.5 1.5 0 0110.5 1h3A1.5 1.5 0 0115 2.5v3A1.5 1.5 0 0113.5 7h-3A1.5 1.5 0 019 5.5v-3zm-8 8A1.5 1.5 0 012.5 9h3A1.5 1.5 0 017 10.5v3A1.5 1.5 0 015.5 15h-3A1.5 1.5 0 011 13.5v-3zm8 0A1.5 1.5 0 0110.5 9h3a1.5 1.5 0 011.5 1.5v3a1.5 1.5 0 01-1.5 1.5h-3A1.5 1.5 0 019 13.5v-3z' />
+      </svg>
+    )}
+
+    {iconName === 'list' && (
+      <svg
+        className='w-5 h-5 ml-0 group-hover:-ml-1 group-focus:-ml-1 transition-all'
+        viewBox='0 0 512 512'
+        fill='currentColor'
+      >
+        <path d='M0 96c0-35.3 28.7-64 64-64h384c35.3 0 64 28.7 64 64v320c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V96zm64 0v64h64V96H64zm384 0H192v64h256V96zM64 224v64h64v-64H64zm384 0H192v64h256v-64zM64 352v64h64v-64H64zm384 0H192v64h256v-64z' />
       </svg>
     )}
 

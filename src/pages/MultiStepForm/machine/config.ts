@@ -106,6 +106,9 @@ export const config: MachineConfig<Context, StateSchema, MachineEvents> = {
             ADD_DISH_SELECTOR: {
               actions: ['addDishSelector'],
             },
+            VIEW_TYPE: {
+              actions: ['assignDishViewType'],
+            },
           },
         },
         step_four: {

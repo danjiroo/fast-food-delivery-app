@@ -15,7 +15,6 @@ export interface ConfirmEvent {
 export interface ResetEvent {
   type: 'RESET'
 }
-
 export interface SelectMealEvent {
   type: 'SELECT_MEAL'
   payload: DishOption
@@ -69,6 +68,11 @@ export interface UpdateDishOptionsEvent {
   payload: Item[]
 }
 
+export interface SelectedDishViewTypeEvent {
+  type: 'VIEW_TYPE'
+  payload: 'grid' | 'list'
+}
+
 export type MachineEvents =
   | NextEvent
   | PrevEvent
@@ -85,3 +89,4 @@ export type MachineEvents =
   | RemoveDishEvent
   | ConfirmEvent
   | ResetEvent
+  | SelectedDishViewTypeEvent

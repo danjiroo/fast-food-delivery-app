@@ -82,6 +82,11 @@ const MultiStepFormProvider: React.FC<PropsWithChildren> = ({ children }) => {
         type: 'REMOVE_DISH',
         payload,
       }),
+    handleChangeDishViewType: (payload) =>
+      send({
+        type: 'VIEW_TYPE',
+        payload,
+      }),
   }
 
   return (
