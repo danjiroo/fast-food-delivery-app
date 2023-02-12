@@ -70,8 +70,8 @@ const StyledDropdown: React.FC<StyledDropdownProps> = ({
       >
         <span
           className={`${
-            !selectedOption?.value ? 'text-zinc-300' : ''
-          } text-gray-700 text-ellipsis overflow-hidden whitespace-nowrap`}
+            !selectedOption?.value ? 'text-zinc-300' : 'text-gray-700'
+          }  text-ellipsis overflow-hidden whitespace-nowrap`}
         >
           {selectedOption ? selectedOption.label : 'Select an option'}
         </span>
@@ -99,11 +99,11 @@ const StyledDropdown: React.FC<StyledDropdownProps> = ({
         ) : null}
       </div>
       {isOpen && options?.length ? (
-        <ul className='absolute w-full mt-1 bg-white rounded-lg shadow-lg overflow-auto z-10'>
+        <ul className='absolute w-full mt-1 bg-white rounded-lg shadow-xl overflow-auto z-10'>
           {options.map((option, index) => (
             <li
               key={index}
-              className='px-4 py-2 cursor-pointer hover:bg-emerald-400 hover:text-white'
+              className='px-4 py-2 cursor-pointer text-zinc-700 hover:bg-emerald-400 hover:text-white'
               onClick={() => handleSelectOption(option)}
             >
               {option?.label}

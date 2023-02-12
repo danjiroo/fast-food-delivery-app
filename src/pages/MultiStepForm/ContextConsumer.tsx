@@ -3,7 +3,13 @@
 import React, { useContext } from 'react'
 import cn from 'classnames'
 
-import { StepOne, StepTwo, StepThree, StepFour } from '../../components'
+import {
+  StepOne,
+  StepTwo,
+  StepThree,
+  StepFour,
+  OrderCompleted,
+} from '../../components'
 
 import { MultiStepFormActions, MultiStepFormState } from './ContextProvider'
 
@@ -53,6 +59,7 @@ const ContextConsumer: React.FC = () => {
       {providerState.matches('ready.step_two') && <StepTwo />}
       {providerState.matches('ready.step_three') && <StepThree />}
       {providerState.matches('ready.step_four') && <StepFour />}
+      {providerState.matches('order_completed') && <OrderCompleted />}
 
       <div
         className='wizard-container w-full p-5 xl:w-3/4 bottom-[5rem] sm:bottom-[2.5rem]'

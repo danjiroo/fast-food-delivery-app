@@ -5,6 +5,7 @@ interface StyledButtonProps
   extends PropsWithChildren,
     HTMLProps<HTMLButtonElement> {
   iconPosition?: 'left' | 'right'
+  outline?: 'solid' | 'outline'
   iconName?: 'arrow-right' | 'arrow-left' | 'plus' | 'check' | 'x' | 'trash'
 }
 
@@ -12,6 +13,7 @@ const StyledButton: React.FC<StyledButtonProps> = ({
   className = '',
   iconPosition = 'right',
   iconName = 'plus',
+  outline = 'solid',
   children,
   ...props
 }) => (
@@ -20,8 +22,12 @@ const StyledButton: React.FC<StyledButtonProps> = ({
     type='button'
     className={cn(
       className,
-      `text-white bg-emerald-500 hover:bg-emerald-600 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center transition-all ${
+      `focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center transition-all ${
         children ? 'group' : ''
+      } ${
+        outline === 'outline'
+          ? 'text-emerald-500 border-emerald-500 hover:border-emerald-600 hover:text-emerald-600 border-2 px-2 py-2'
+          : 'text-white bg-emerald-500 hover:bg-emerald-600'
       }`
     )}
   >
@@ -30,7 +36,7 @@ const StyledButton: React.FC<StyledButtonProps> = ({
     {iconName === 'plus' && (
       <svg
         aria-hidden='true'
-        className={`w-5 h-5 ml-0 group-hover:ml-5 group-focus:ml-5 transition-all`}
+        className={`w-5 h-5 mr-1`}
         fill='currentColor'
         viewBox={`0 0 580 1000`}
         xmlns='http://www.w3.org/2000/svg'

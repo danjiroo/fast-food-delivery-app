@@ -30,6 +30,11 @@ export interface StateSchema {
   states: {
     loading: StateNodeDefinition<Context, AnyStateNodeDefinition, MachineEvents>
     ready: StateNodeDefinition<Context, ReadyStateSchema, MachineEvents>
+    order_completed: StateNodeDefinition<
+      Context,
+      AnyStateNodeDefinition,
+      MachineEvents
+    >
     done: StateNodeDefinition<Context, AnyStateNodeDefinition, MachineEvents>
   }
 }

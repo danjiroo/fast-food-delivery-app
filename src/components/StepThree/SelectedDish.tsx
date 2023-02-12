@@ -31,7 +31,7 @@ const SelectedDish: React.FC<SelectedDishProps> = ({
   const { id, value, servings } = selectedDish
 
   return (
-    <div className='flex items-center justify-between gap-4 mb-3' key={id}>
+    <div className='flex items-center justify-between gap-4 mb-2' key={id}>
       <StyledDropdown
         value={selectedDish}
         className='w-7/12'

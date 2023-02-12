@@ -8,6 +8,14 @@ export interface PrevEvent {
   type: 'PREV'
 }
 
+export interface ConfirmEvent {
+  type: 'CONFIRM'
+}
+
+export interface ResetEvent {
+  type: 'RESET'
+}
+
 export interface SelectMealEvent {
   type: 'SELECT_MEAL'
   payload: DishOption
@@ -75,3 +83,5 @@ export type MachineEvents =
   | UpdateRestaurantOptionsEvent
   | UpdateDishOptionsEvent
   | RemoveDishEvent
+  | ConfirmEvent
+  | ResetEvent

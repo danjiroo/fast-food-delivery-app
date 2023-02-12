@@ -1,3 +1,4 @@
+/* eslint-disable no-empty-pattern */
 /* eslint-disable indent */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable no-unused-vars */
@@ -80,10 +81,28 @@ export const actions: ActionFunctionMap<Context, MachineEvents | any> = {
         restaurantOptions: [...new Set(filteredRestaurants)],
       }
     },
+    errorFields: ({ errorFields }) => ({
+      ...errorFields,
+      meal: {
+        error: false,
+        errorText: '',
+      },
+      numberOfPeople: {
+        error: false,
+        errorText: '',
+      },
+    }),
   }),
 
   assignNumberOfPeople: assign({
     selectedNumberOfPeople: (_, { payload }: SetNumberOfPeopleEvent) => payload,
+    errorFields: ({ errorFields }) => ({
+      ...errorFields,
+      meal: {
+        error: false,
+        errorText: '',
+      },
+    }),
   }),
 
   assignSelectedRestaurant: assign({
@@ -115,6 +134,13 @@ export const actions: ActionFunctionMap<Context, MachineEvents | any> = {
         dishOptions: [...new Set(filteredDishes)],
       }
     },
+    errorFields: ({ errorFields }) => ({
+      ...errorFields,
+      restaurant: {
+        error: false,
+        errorText: '',
+      },
+    }),
   }),
 
   assignDish: assign({
@@ -180,6 +206,13 @@ export const actions: ActionFunctionMap<Context, MachineEvents | any> = {
         dishOptions: filteredDishOptions ?? [],
       }
     },
+    errorFields: ({ errorFields }) => ({
+      ...errorFields,
+      dishes: {
+        error: false,
+        errorText: '',
+      },
+    }),
   }),
 
   removeDish: assign({
@@ -234,6 +267,13 @@ export const actions: ActionFunctionMap<Context, MachineEvents | any> = {
 
       return updatedDishes ?? []
     },
+    errorFields: ({ errorFields }) => ({
+      ...errorFields,
+      dishes: {
+        error: false,
+        errorText: '',
+      },
+    }),
   }),
 
   trimSelectedDishes: assign({
@@ -260,4 +300,86 @@ export const actions: ActionFunctionMap<Context, MachineEvents | any> = {
       ]
     },
   }),
+
+  assignNoSelectedMealError: assign({
+    errorFields: ({ errorFields }) => ({
+      ...errorFields,
+      meal: {
+        error: true,
+        errorText: 'Meal is required.',
+      },
+    }),
+  }),
+
+  noSelectedAndMaxPeopleReached: assign({
+    errorFields: ({ errorFields }) => ({
+      ...errorFields,
+      numberOfPeople: {
+        error: true,
+        errorText: 'You"ve reached the maximum number of people.',
+      },
+    }),
+  }),
+
+  assignNoSelectedRestaurantError: assign({
+    errorFields: ({ errorFields }) => ({
+      ...errorFields,
+      restaurant: {
+        error: true,
+        errorText: 'Restaurant is required.',
+      },
+    }),
+  }),
+
+  assignNoSelectedDishError: assign({
+    errorFields: ({ errorFields }) => ({
+      ...errorFields,
+      dishes: {
+        error: true,
+        errorText: 'Please select a dish.',
+      },
+    }),
+  }),
+
+  assignNotEnoughDishForPeopleError: assign({
+    errorFields: ({ errorFields, selectedNumberOfPeople }) => ({
+      ...errorFields,
+      dishes: {
+        error: true,
+        errorText: `Not enough dish for ${selectedNumberOfPeople} people.`,
+      },
+    }),
+  }),
+
+  resetContext: assign({
+    errorFields: ({}) => ({}),
+    items: ({}) => [],
+    options: ({}) => ({}),
+    selectedDishes: ({}) => [],
+    selectedMeal: ({}) => '',
+    selectedNumberOfPeople: ({}) => 1,
+    selectedRestaurant: ({}) => '',
+  }),
+
+  logResult: (context) => {
+    const {
+      selectedDishes,
+      selectedMeal,
+      selectedNumberOfPeople,
+      selectedRestaurant,
+    } = context
+    console.log(
+      '🍕 Output:',
+      JSON.stringify(
+        {
+          selectedDishes,
+          selectedMeal,
+          selectedNumberOfPeople,
+          selectedRestaurant,
+        },
+        null,
+        2
+      )
+    )
+  },
 }

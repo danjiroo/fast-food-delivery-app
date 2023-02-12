@@ -7,6 +7,8 @@ import { Context, MachineEvents, StateSchema, Dish, Item } from './machine'
 export interface ActionsProps {
   handleNext: () => void
   handlePrev: () => void
+  handleConfirm: () => void
+  handleReset: () => void
   handleSelectMeal: (option: Option) => void
   handleSetNumberOfPeople: (numberOfPeople: number | unknown) => void
   handleSelectRestaurant: (option: Option) => void

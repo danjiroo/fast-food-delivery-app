@@ -21,7 +21,10 @@ const StepOne: React.FC = () => {
     options: { availableMealOptions = [] },
     selectedMeal,
     selectedNumberOfPeople = 1,
+    errorFields,
   } = providerState.context ?? {}
+  const { meal } = errorFields ?? {}
+  const { error = false, errorText = '' } = meal ?? {}
 
   const { handleSelectMeal, handleSetNumberOfPeople, handleNext } =
     providerActions
@@ -74,14 +77,21 @@ const StepOne: React.FC = () => {
         </div>
       </div>
 
-      <StyledButton
-        iconName='arrow-right'
-        iconPosition='right'
-        className='w-[200px] xl:w-full'
-        onClick={handleNext}
-      >
-        Proceed
-      </StyledButton>
+      <div className='w-full relative mt-2'>
+        {error ? (
+          <StyledParagraph className='absolute -top-7 pl-1 text-red-400 mb-2 text-ellipsis overflow-hidden whitespace-nowrap'>
+            <small>{errorText}</small>
+          </StyledParagraph>
+        ) : null}
+        <StyledButton
+          iconName='arrow-right'
+          iconPosition='right'
+          className='w-[200px] xl:w-full'
+          onClick={handleNext}
+        >
+          Proceed
+        </StyledButton>
+      </div>
     </div>
   )
 }

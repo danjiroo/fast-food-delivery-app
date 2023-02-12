@@ -36,6 +36,8 @@ const MultiStepFormProvider: React.FC<PropsWithChildren> = ({ children }) => {
   const actions: ActionsProps = {
     handleNext: () => send('NEXT'),
     handlePrev: () => send('PREV'),
+    handleConfirm: () => send('CONFIRM'),
+    handleReset: () => send('RESET'),
     handleSelectMeal: (payload) =>
       send({
         type: 'SELECT_MEAL',

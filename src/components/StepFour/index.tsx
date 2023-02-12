@@ -16,7 +16,7 @@ const StepFour: React.FC = () => {
     selectedRestaurant,
     selectedDishes,
   } = providerState.context ?? {}
-  const { handlePrev } = providerActions
+  const { handlePrev, handleConfirm } = providerActions
 
   const mappedSelectedDishes = Object.entries(selectedDishes ?? {})?.map(
     ([, { id, label, servings }]) => (
@@ -82,13 +82,16 @@ const StepFour: React.FC = () => {
         </div>
       </div>
 
-      <div className='flex items-center'>
+      <div className='flex w-full items-center gap-2 relative mt-2'>
         <StyledButton
           onClick={handlePrev}
           iconPosition='left'
           iconName='arrow-left'
         >
           Previous
+        </StyledButton>
+        <StyledButton onClick={handleConfirm} iconName='arrow-right'>
+          Confirm
         </StyledButton>
       </div>
     </div>

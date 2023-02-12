@@ -26,19 +26,42 @@ export const config: MachineConfig<Context, StateSchema, MachineEvents> = {
         step_one: {
           id: 'step_one',
           on: {
-            NEXT: '#step_two',
+            NEXT: [
+              {
+                cond: 'noSelectedMeal',
+                actions: ['assignNoSelectedMealError'],
+              },
+              {
+                target: '#step_two',
+              },
+            ],
             SELECT_MEAL: {
               actions: ['assignSelectedMeal'],
             },
-            SET_NUMBER_OF_PEOPLE: {
-              actions: ['assignNumberOfPeople'],
-            },
+            SET_NUMBER_OF_PEOPLE: [
+              // {
+              //   // Although I already handled this in the component
+              //   cond: 'maxPeopleReached',
+              //   actions: ['assignNumberOfPeople', 'assignMaxPeopleReached'],
+              // },
+              {
+                actions: ['assignNumberOfPeople'],
+              },
+            ],
           },
         },
         step_two: {
           id: 'step_two',
           on: {
-            NEXT: '#step_three',
+            NEXT: [
+              {
+                cond: 'noSelectedRestaurant',
+                actions: ['assignNoSelectedRestaurantError'],
+              },
+              {
+                target: '#step_three',
+              },
+            ],
             PREV: '#step_one',
             UPDATE_RESTAURANT_OPTIONS: {
               actions: ['assignRestaurantOptions'],
@@ -51,10 +74,20 @@ export const config: MachineConfig<Context, StateSchema, MachineEvents> = {
         step_three: {
           id: 'step_three',
           on: {
-            NEXT: {
-              actions: ['trimSelectedDishes'],
-              target: '#step_four',
-            },
+            NEXT: [
+              {
+                cond: 'noSelectedDish',
+                actions: ['assignNoSelectedDishError'],
+              },
+              {
+                cond: 'notEnoughDishForPeople',
+                actions: ['assignNotEnoughDishForPeopleError'],
+              },
+              {
+                actions: ['trimSelectedDishes'],
+                target: '#step_four',
+              },
+            ],
             PREV: '#step_two',
             UPDATE_DISH_OPTIONS: {
               actions: ['assignDishOptions'],
@@ -77,7 +110,18 @@ export const config: MachineConfig<Context, StateSchema, MachineEvents> = {
           id: 'step_four',
           on: {
             PREV: '#step_three',
+            CONFIRM: '#order_completed',
           },
+        },
+      },
+    },
+    order_completed: {
+      id: 'order_completed',
+      entry: ['logResult'],
+      on: {
+        RESET: {
+          actions: ['resetContext'],
+          target: '#loading',
         },
       },
     },

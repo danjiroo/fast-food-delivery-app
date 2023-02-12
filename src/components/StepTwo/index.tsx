@@ -19,7 +19,10 @@ const StepTwo: React.FC = () => {
   const {
     options: { restaurantOptions = [] },
     selectedRestaurant,
+    errorFields,
   } = providerState.context ?? {}
+  const { restaurant } = errorFields ?? {}
+  const { error = false, errorText = '' } = restaurant ?? {}
 
   const { handleSelectRestaurant, handleNext, handlePrev } = providerActions
 
@@ -52,7 +55,12 @@ const StepTwo: React.FC = () => {
           />
         </div>
       </div>
-      <div className='flex w-full items-center gap-2'>
+      <div className='flex w-full items-center gap-2 relative mt-2'>
+        {error ? (
+          <StyledParagraph className='absolute -top-7 pl-1 text-red-400 mb-2 text-ellipsis overflow-hidden whitespace-nowrap'>
+            <small>{errorText}</small>
+          </StyledParagraph>
+        ) : null}
         <StyledButton
           className='w-[200px]'
           onClick={handlePrev}

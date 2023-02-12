@@ -13,7 +13,10 @@ const StepThree: React.FC = () => {
 
   const {
     options: { dishOptions = [] },
+    errorFields,
   } = providerState.context ?? {}
+  const { dishes } = errorFields ?? {}
+  const { error = false, errorText = '' } = dishes ?? {}
 
   const { handleNext, handlePrev, handleAddDishSelector } = providerActions
 
@@ -43,12 +46,24 @@ const StepThree: React.FC = () => {
         </div>
 
         {dishOptions?.length ? (
-          <div>
-            <StyledButton iconName='plus' onClick={handleAddDishSelector} />
+          <div className='mb-3 text-right pr-2'>
+            <StyledButton
+              iconName='plus'
+              iconPosition='left'
+              outline='outline'
+              onClick={handleAddDishSelector}
+            >
+              Add Dish
+            </StyledButton>
           </div>
         ) : null}
 
-        <div className='flex items-center gap-2 mt-5 w-full'>
+        <div className='flex w-full items-center gap-2 relative mt-5'>
+          {error ? (
+            <StyledParagraph className='absolute -top-7 pl-1 text-red-400 mb-2 text-ellipsis overflow-hidden whitespace-nowrap'>
+              <small>{errorText}</small>
+            </StyledParagraph>
+          ) : null}
           <StyledButton
             className='w-1/2'
             onClick={handlePrev}

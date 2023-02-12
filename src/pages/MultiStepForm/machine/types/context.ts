@@ -21,11 +21,21 @@ export interface Dish extends DishOption {
   servings: number
 }
 
+export interface Error {
+  error: boolean
+  errorText: string
+}
+
+type ErrorSlots = 'meal' | 'restaurant' | 'numberOfPeople' | 'dishes'
+
 export interface Context {
   items: Item[]
-  options: Options
+  options: Partial<Options>
   selectedNumberOfPeople?: number
   selectedMeal?: string
   selectedRestaurant?: string
   selectedDishes?: Dish[]
+  errorFields: Partial<{
+    [P in ErrorSlots]: Error
+  }>
 }
