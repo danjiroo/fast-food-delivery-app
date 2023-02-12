@@ -7,12 +7,12 @@
         box-sizing: border-box;
     }
 
-    html {
+    /* html {
         overflow: hidden;
         width: 100%;
-      }
+      } */
     
-    body {
+    /* body {
         height: 100%;
         position: fixed;
         top: 0;
@@ -21,15 +21,15 @@
         bottom: 0;
         width: 100%;
         -webkit-overflow-scrolling: touch;
-    }
+    } */
 
-    body > #root {
+    /* body > #root {
         position: fixed;
         top: 0;
         left: 0;
         right: 0;
         bottom: 0;
-    }
+    } */
 
     /* Chrome, Safari, Edge, Opera */
     input::-webkit-outer-spin-button,
@@ -84,6 +84,9 @@
         position: absolute;
         left: 50%;
         transform: translateX(-50%);
+        box-shadow: 0px -56px 76px -2px rgba(0,0,0,0.06);
+        -webkit-box-shadow: 0px -56px 76px -2px rgba(0,0,0,0.06);
+        -moz-box-shadow: 0px -56px 76px -2px rgba(0,0,0,0.06);
     }
 
     .wizard-bar {
