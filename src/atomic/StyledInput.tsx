@@ -20,49 +20,25 @@ const StyledInput: React.FC<StyledInputProps> = ({
   const [inputValue, setInputValue] = useState<number>(value)
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
-    if (!rest?.max && !rest?.min && Number(event.target.value) >= 0) {
-      setInputValue(parseInt(event.target.value))
-      handleChange(parseInt(event.target.value))
-      return
-    }
-
-    if (rest?.max && rest?.min && parseInt(event.target.value) <= rest?.max) {
-      setInputValue(parseInt(event.target.value))
-      handleChange(parseInt(event.target.value))
-    }
+    setInputValue(parseInt(event.target.value))
+    handleChange(parseInt(event.target.value))
   }
 
   const handleIncrement = () => {
     if (rest.disabled) return
 
-    if (!rest?.max) {
-      setInputValue(Number(inputValue) + 1)
-      handleChange(Number(inputValue) + 1)
-      return
-    }
-
     // allow clicking until input is 10 (+ 1) to show the maximum error text
     // but wont be saved, and keeps the context at 10
     // still can click on continue since it wasn't incremented to 11 and so on
-    if (inputValue <= rest?.max) {
-      setInputValue(Number(inputValue))
-      handleChange(Number(inputValue) + 1)
-    }
+    setInputValue(Number(inputValue))
+    handleChange(Number(inputValue) + 1)
   }
 
   const handleDecrement = () => {
     if (rest.disabled) return
 
-    if (!rest?.min) {
-      inputValue > 0 && setInputValue(Number(inputValue) - 1)
-      inputValue > 0 && handleChange(Number(inputValue) - 1)
-      return
-    }
-
-    if (inputValue > rest?.min) {
-      setInputValue(Number(inputValue) - 1)
-      handleChange(Number(inputValue) - 1)
-    }
+    value > 0 && setInputValue(Number(inputValue))
+    value > 0 && handleChange(Number(inputValue) - 1)
   }
 
   useEffect(() => {
@@ -74,11 +50,9 @@ const StyledInput: React.FC<StyledInputProps> = ({
       {type === 'number' && (
         <svg
           viewBox='0 0 1024 1024'
-          fill={`${
-            rest.disabled || (rest?.min && value <= rest.min) ? '#ddd' : 'gray'
-          }`}
+          fill={`${rest.disabled || inputValue < 1 ? '#ddd' : 'gray'}`}
           className={`cursor-pointer h-[2.3em] w-[40px] hover:fill-green-300 hover:border-green-300 border-2 rounded-lg transition-all ${
-            rest.disabled || (rest?.min && value <= rest.min)
+            rest.disabled || inputValue < 1
               ? 'border-gray-100 fill-gray-100 hover:fill-gray-100  hover:border-gray-100'
               : ''
           }`}
@@ -101,12 +75,10 @@ const StyledInput: React.FC<StyledInputProps> = ({
       />
       {type === 'number' && (
         <svg
-          fill={`${
-            rest.disabled || (rest?.max && value >= rest.max) ? '#ddd' : 'gray'
-          }`}
+          fill={`${rest.disabled || inputValue >= 10 ? '#ddd' : 'gray'}`}
           viewBox='0 0 16 16'
           className={`cursor-pointer h-[2.3em] w-[40px] hover:fill-green-300 hover:border-green-300 border-2 rounded-lg transition-all ${
-            rest.disabled || (rest?.max && value >= rest.max)
+            rest.disabled || inputValue >= 10
               ? 'border-gray-100 fill-gray-100 hover:fill-gray-100  hover:border-gray-100'
               : ''
           }`}

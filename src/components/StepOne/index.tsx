@@ -71,10 +71,8 @@ const StepOne: React.FC = () => {
             name='numberOfPeople'
             type='number'
             value={selectedNumberOfPeople ?? 1}
-            disabled={selectedNumberOfPeople > 10}
+            disabled={selectedNumberOfPeople > 10 && selectedNumberOfPeople < 1}
             handleChange={handleNumberOfPeopleChange}
-            min={1}
-            max={10}
           />
         </div>
       </div>
