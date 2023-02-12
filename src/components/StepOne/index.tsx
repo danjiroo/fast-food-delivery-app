@@ -23,8 +23,8 @@ const StepOne: React.FC = () => {
     selectedNumberOfPeople = 1,
     errorFields,
   } = providerState.context ?? {}
-  const { meal } = errorFields ?? {}
-  const { error = false, errorText = '' } = meal ?? {}
+
+  const { error = false, errorText = '' } = errorFields ?? {}
 
   const { handleSelectMeal, handleSetNumberOfPeople, handleNext } =
     providerActions
@@ -70,6 +70,7 @@ const StepOne: React.FC = () => {
             name='numberOfPeople'
             type='number'
             value={selectedNumberOfPeople}
+            disabled={selectedNumberOfPeople > 10}
             handleChange={handleNumberOfPeopleChange}
             min={1}
             max={10}

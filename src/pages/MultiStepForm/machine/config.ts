@@ -25,6 +25,7 @@ export const config: MachineConfig<Context, StateSchema, MachineEvents> = {
       states: {
         step_one: {
           id: 'step_one',
+          entry: ['removeError'],
           on: {
             NEXT: [
               {
@@ -39,11 +40,10 @@ export const config: MachineConfig<Context, StateSchema, MachineEvents> = {
               actions: ['assignSelectedMeal'],
             },
             SET_NUMBER_OF_PEOPLE: [
-              // {
-              //   // Although I already handled this in the component
-              //   cond: 'maxPeopleReached',
-              //   actions: ['assignNumberOfPeople', 'assignMaxPeopleReached'],
-              // },
+              {
+                cond: 'maxPeopleReached',
+                actions: ['assignMaxPeopleReachedError'],
+              },
               {
                 actions: ['assignNumberOfPeople'],
               },
@@ -52,6 +52,7 @@ export const config: MachineConfig<Context, StateSchema, MachineEvents> = {
         },
         step_two: {
           id: 'step_two',
+          entry: ['removeError'],
           on: {
             NEXT: [
               {
@@ -73,6 +74,7 @@ export const config: MachineConfig<Context, StateSchema, MachineEvents> = {
         },
         step_three: {
           id: 'step_three',
+          entry: ['removeError'],
           on: {
             NEXT: [
               {

@@ -15,8 +15,7 @@ const StepThree: React.FC = () => {
     options: { dishOptions = [] },
     errorFields,
   } = providerState.context ?? {}
-  const { dishes } = errorFields ?? {}
-  const { error = false, errorText = '' } = dishes ?? {}
+  const { error = false, errorText = '' } = errorFields ?? {}
 
   const { handleNext, handlePrev, handleAddDishSelector } = providerActions
 

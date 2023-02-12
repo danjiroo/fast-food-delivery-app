@@ -26,7 +26,7 @@ export interface Error {
   errorText: string
 }
 
-type ErrorSlots = 'meal' | 'restaurant' | 'numberOfPeople' | 'dishes'
+// type ErrorSlots = 'meal' | 'restaurant' | 'numberOfPeople' | 'dishes'
 
 export interface Context {
   items: Item[]
@@ -35,7 +35,8 @@ export interface Context {
   selectedMeal?: string
   selectedRestaurant?: string
   selectedDishes?: Dish[]
-  errorFields: Partial<{
-    [P in ErrorSlots]: Error
-  }>
+  // errorFields: Partial<{
+  //   [P in ErrorSlots]: Error
+  // }>
+  errorFields?: Error
 }

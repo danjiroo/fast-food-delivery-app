@@ -83,25 +83,20 @@ export const actions: ActionFunctionMap<Context, MachineEvents | any> = {
     },
     errorFields: ({ errorFields }) => ({
       ...errorFields,
-      meal: {
-        error: false,
-        errorText: '',
-      },
-      numberOfPeople: {
-        error: false,
-        errorText: '',
-      },
+      error: false,
+      errorText: '',
     }),
   }),
 
   assignNumberOfPeople: assign({
-    selectedNumberOfPeople: (_, { payload }: SetNumberOfPeopleEvent) => payload,
+    selectedNumberOfPeople: (_, { payload }: SetNumberOfPeopleEvent) => {
+      console.log('Set number of people:', payload)
+      return payload
+    },
     errorFields: ({ errorFields }) => ({
       ...errorFields,
-      meal: {
-        error: false,
-        errorText: '',
-      },
+      error: false,
+      errorText: '',
     }),
   }),
 
@@ -136,10 +131,8 @@ export const actions: ActionFunctionMap<Context, MachineEvents | any> = {
     },
     errorFields: ({ errorFields }) => ({
       ...errorFields,
-      restaurant: {
-        error: false,
-        errorText: '',
-      },
+      error: false,
+      errorText: '',
     }),
   }),
 
@@ -208,10 +201,8 @@ export const actions: ActionFunctionMap<Context, MachineEvents | any> = {
     },
     errorFields: ({ errorFields }) => ({
       ...errorFields,
-      dishes: {
-        error: false,
-        errorText: '',
-      },
+      error: false,
+      errorText: '',
     }),
   }),
 
@@ -269,10 +260,8 @@ export const actions: ActionFunctionMap<Context, MachineEvents | any> = {
     },
     errorFields: ({ errorFields }) => ({
       ...errorFields,
-      dishes: {
-        error: false,
-        errorText: '',
-      },
+      error: false,
+      errorText: '',
     }),
   }),
 
@@ -304,61 +293,61 @@ export const actions: ActionFunctionMap<Context, MachineEvents | any> = {
   assignNoSelectedMealError: assign({
     errorFields: ({ errorFields }) => ({
       ...errorFields,
-      meal: {
-        error: true,
-        errorText: 'Meal is required.',
-      },
+      error: true,
+      errorText: 'Meal is required.',
     }),
   }),
 
-  noSelectedAndMaxPeopleReached: assign({
+  assignMaxPeopleReachedError: assign({
     errorFields: ({ errorFields }) => ({
       ...errorFields,
-      numberOfPeople: {
-        error: true,
-        errorText: 'You"ve reached the maximum number of people.',
-      },
+      error: true,
+      errorText: "You've reached the maximum number of people.",
     }),
   }),
 
   assignNoSelectedRestaurantError: assign({
     errorFields: ({ errorFields }) => ({
       ...errorFields,
-      restaurant: {
-        error: true,
-        errorText: 'Restaurant is required.',
-      },
+      error: true,
+      errorText: 'Restaurant is required.',
     }),
   }),
 
   assignNoSelectedDishError: assign({
     errorFields: ({ errorFields }) => ({
       ...errorFields,
-      dishes: {
-        error: true,
-        errorText: 'Please select a dish.',
-      },
+      error: true,
+      errorText: 'Please select a dish.',
     }),
   }),
 
   assignNotEnoughDishForPeopleError: assign({
     errorFields: ({ errorFields, selectedNumberOfPeople }) => ({
       ...errorFields,
-      dishes: {
-        error: true,
-        errorText: `Not enough dish for ${selectedNumberOfPeople} people.`,
-      },
+      error: true,
+      errorText: `Not enough dish for ${selectedNumberOfPeople} people.`,
     }),
   }),
 
   resetContext: assign({
-    errorFields: ({}) => ({}),
+    errorFields: ({}) => ({
+      error: false,
+      errorText: '',
+    }),
     items: ({}) => [],
     options: ({}) => ({}),
     selectedDishes: ({}) => [],
     selectedMeal: ({}) => '',
     selectedNumberOfPeople: ({}) => 1,
     selectedRestaurant: ({}) => '',
+  }),
+
+  removeError: assign({
+    errorFields: ({}) => ({
+      error: false,
+      errorText: '',
+    }),
   }),
 
   logResult: (context) => {

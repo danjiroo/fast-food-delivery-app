@@ -21,8 +21,7 @@ const StepTwo: React.FC = () => {
     selectedRestaurant,
     errorFields,
   } = providerState.context ?? {}
-  const { restaurant } = errorFields ?? {}
-  const { error = false, errorText = '' } = restaurant ?? {}
+  const { error = false, errorText = '' } = errorFields ?? {}
 
   const { handleSelectRestaurant, handleNext, handlePrev } = providerActions
 
