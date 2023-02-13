@@ -77,7 +77,7 @@ const StepOne: React.FC = () => {
         </div>
       </div>
 
-      <div className='w-full relative mt-2'>
+      <div className='flex w-full justify-end gap-2 mt-5 fixed bottom-[4rem] left-0 right-0 px-5 py-4 pb-0 bg-white md:relative md:bottom-[unset] md:p-0'>
         {error ? (
           <StyledParagraph className='absolute -top-7 pl-1 text-red-400 mb-2 text-ellipsis overflow-hidden whitespace-nowrap'>
             <small>{errorText}</small>
@@ -86,7 +86,7 @@ const StepOne: React.FC = () => {
         <StyledButton
           iconName='arrow-right'
           iconPosition='right'
-          className='w-[200px] xl:w-full'
+          className='w-1/2'
           onClick={handleNext}
         >
           Proceed

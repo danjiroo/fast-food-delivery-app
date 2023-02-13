@@ -55,14 +55,15 @@ const StepTwo: React.FC = () => {
           />
         </div>
       </div>
-      <div className='flex w-full items-center gap-2 relative mt-2'>
+      {/* <div className='flex w-full items-center gap-2 relative mt-2'> */}
+      <div className='flex w-full items-center gap-2 mt-5 fixed bottom-[4rem] left-0 right-0 px-5 py-4 pb-0 bg-white md:relative md:bottom-[unset] md:p-0'>
         {error ? (
           <StyledParagraph className='absolute -top-7 pl-1 text-red-400 mb-2 text-ellipsis overflow-hidden whitespace-nowrap'>
             <small>{errorText}</small>
           </StyledParagraph>
         ) : null}
         <StyledButton
-          className='w-[200px]'
+          className='w-1/2'
           onClick={handlePrev}
           iconName='arrow-left'
           iconPosition='left'
@@ -70,7 +71,7 @@ const StepTwo: React.FC = () => {
           Previous
         </StyledButton>
         <StyledButton
-          className='w-[200px]'
+          className='w-1/2'
           onClick={handleNext}
           iconName='arrow-right'
           iconPosition='right'

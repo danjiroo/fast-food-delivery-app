@@ -12,7 +12,7 @@ const GridSelectedDishCard: React.FC<SelectedCardProps> = ({ dish }) => {
   const { name } = dish
 
   return (
-    <div className='flex items-center justify-center w-[32%]'>
+    <div className='flex items-center justify-center w-[100%] xs:w-[48%] sm:w-[32%] md:w-[48%] lg:w-[32%]'>
       <div className='rounded-lg shadow-md bg-white max-w-sm'>
         <a href='#!'>
           <img

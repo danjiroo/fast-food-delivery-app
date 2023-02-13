@@ -125,6 +125,7 @@ export const actions: ActionFunctionMap<Context, MachineEvents | any> = {
       return {
         ...options,
         dishOptions: [...new Set(filteredDishes)],
+        dishOptionsFixed: [...new Set(filteredDishes)],
       }
     },
     errorFields: ({ errorFields }) => ({
@@ -174,7 +175,12 @@ export const actions: ActionFunctionMap<Context, MachineEvents | any> = {
     },
 
     options: (
-      { items = [], options, selectedDishes = [] },
+      {
+        items = [],
+        options,
+        selectedDishes = [],
+        selectedDishesViewType = 'list',
+      },
       { payload }: SelectDishEvent
     ) => {
       const { id } = payload ?? {}
@@ -347,7 +353,12 @@ export const actions: ActionFunctionMap<Context, MachineEvents | any> = {
       errorText: '',
     }),
     items: ({}) => [],
-    options: ({}) => ({}),
+    options: ({}) => ({
+      availableMealOptions: [],
+      restaurantOptions: [],
+      dishOptions: [],
+      dishOptionsFixed: [],
+    }),
     selectedDishes: ({}) => [],
     selectedMeal: ({}) => '',
     selectedNumberOfPeople: ({}) => 1,

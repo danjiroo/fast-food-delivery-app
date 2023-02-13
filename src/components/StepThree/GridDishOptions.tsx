@@ -18,11 +18,11 @@ const GridDishOptions: React.FC = () => {
   if (!providerState || !providerActions) return null
 
   const {
-    options: { dishOptions = [] },
+    options: { dishOptionsFixed = [] },
   } = providerState.context ?? {}
 
-  const mappedSelectedDishes = dishOptions?.length
-    ? dishOptions.map((dish, index) => (
+  const mappedSelectedDishes = dishOptionsFixed?.length
+    ? dishOptionsFixed.map((dish, index) => (
         <GridSelectedDishCard index={index} key={dish?.id} dish={dish} />
       ))
     : 'No meals available.'
@@ -32,7 +32,7 @@ const GridDishOptions: React.FC = () => {
       <StyledParagraph className='pl-1 text-red-400 mb-2 text-ellipsis overflow-hidden whitespace-nowrap'>
         Under construction. Last minute decision to have a grid view.
       </StyledParagraph>
-      <div className='flex flex-wrap gap-2 max-h-[440px] overflow-y-auto pb-5'>
+      <div className='flex flex-wrap justify-between gap-2 max-h-[440px] overflow-x-hidden overflow-y-auto pb-[5rem]'>
         {mappedSelectedDishes}
       </div>
     </>

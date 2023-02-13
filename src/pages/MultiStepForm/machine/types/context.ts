@@ -6,9 +6,10 @@ export interface Item {
 }
 
 export interface Options {
-  dishOptions: Item[]
-  restaurantOptions: string[]
   availableMealOptions: string[]
+  restaurantOptions: string[]
+  dishOptions: Item[]
+  dishOptionsFixed: Item[]
 }
 
 export interface DishOption {
@@ -30,7 +31,7 @@ export interface Error {
 
 export interface Context {
   items: Item[]
-  options: Partial<Options>
+  options: Options
   selectedNumberOfPeople?: number
   selectedMeal?: string
   selectedRestaurant?: string

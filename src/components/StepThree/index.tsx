@@ -26,16 +26,18 @@ const StepThree: React.FC = () => {
     handleChangeDishViewType,
   } = providerActions
 
+  const isListView = selectedDishesViewType === 'list'
+
   return (
-    <div className='flex flex-col w-full p-5 pb-[10rem] xl:w-3/4'>
+    <div
+      className={`flex flex-col w-full p-5 pb-[10rem] xl:w-3/4 ${
+        isListView ? '' : 'h-full'
+      } `}
+    >
       <div>
         <StyledHeading
           level={1}
-          className={`text-3xl min-h-0 mb-3 md:text-5xl md:min-h-[55px] ${
-            selectedDishesViewType === 'list'
-              ? 'text-custom xl:text-8xl xl:min-h-[105px]'
-              : 'xl:text-[3rem] xl:min-h-[unset] text-[#04cf77e5]'
-          }`}
+          className='text-custom text-3xl min-h-0 mb-3 md:text-5xl md:min-h-[55px] xl:text-8xl xl:min-h-[105px]'
         >
           Tasty!
         </StyledHeading>
@@ -45,9 +47,7 @@ const StepThree: React.FC = () => {
       </div>
 
       <div
-        className={`mt-8 flex flex-col ${
-          selectedDishesViewType === 'list' ? 'lg:mt-12' : 'lg:mt-7'
-        }`}
+        className={`mt-8 flex flex-col ${isListView ? 'lg:mt-12' : 'lg:mt-3'}`}
       >
         <div className='w-full mb-2 relative'>
           <StyledParagraph className='text-zinc-400 mb-2 text-ellipsis overflow-hidden whitespace-nowrap'>
@@ -56,38 +56,32 @@ const StepThree: React.FC = () => {
 
           {
             // Decided to hide this since I focused on the list/dropdown view implementation
-            false && (
-              <div className='absolute top-[3px] right-0 flex gap-1'>
-                <StyledButton
-                  outline='outline'
-                  iconName='list'
-                  className={`border-none px-0 py-0 transition-all ${
-                    selectedDishesViewType !== 'list' && 'text-gray-300'
-                  }`}
-                  onClick={() => handleChangeDishViewType('list')}
-                />
-                <StyledButton
-                  outline='outline'
-                  iconName='grid'
-                  className={`border-none px-0 py-0 transition-all ${
-                    selectedDishesViewType !== 'grid' && 'text-gray-300'
-                  }`}
-                  onClick={() => handleChangeDishViewType('grid')}
-                />
-              </div>
-            )
+            <div className='absolute top-[3px] right-0 flex gap-1'>
+              <StyledButton
+                outline='outline'
+                iconName='list'
+                className={`border-none px-0 py-0 transition-all ${
+                  selectedDishesViewType !== 'list' && 'text-gray-300'
+                }`}
+                onClick={() => handleChangeDishViewType('list')}
+              />
+              <StyledButton
+                outline='outline'
+                iconName='grid'
+                className={`border-none px-0 py-0 transition-all ${
+                  selectedDishesViewType !== 'grid' && 'text-gray-300'
+                }`}
+                onClick={() => handleChangeDishViewType('grid')}
+              />
+            </div>
           }
 
           <div className='custom-scrollbar pr-2'>
-            {selectedDishesViewType === 'list' ? (
-              <SelectedDishes />
-            ) : (
-              <GridDishOptions />
-            )}
+            {isListView ? <SelectedDishes /> : <GridDishOptions />}
           </div>
         </div>
 
-        {dishOptions?.length && selectedDishesViewType === 'list' ? (
+        {dishOptions?.length && isListView ? (
           <div className='mb-3 text-right pr-2'>
             <StyledButton
               iconName='plus'
@@ -100,7 +94,11 @@ const StepThree: React.FC = () => {
           </div>
         ) : null}
 
-        <div className='flex w-full items-center gap-2 relative mt-5'>
+        <div
+          className={`flex w-full items-center gap-2 mt-5 fixed bottom-[4rem] left-0 right-0 px-5 py-4 pb-0 bg-white custom-shadow md:relative ${
+            isListView ? 'md:bottom-[unset]' : 'md:bottom-[6rem]'
+          } md:px-0 md:shadow-none'`}
+        >
           {error ? (
             <StyledParagraph className='absolute -top-7 pl-1 text-red-400 mb-2 text-ellipsis overflow-hidden whitespace-nowrap'>
               <small>{errorText}</small>

@@ -82,15 +82,20 @@ const StepFour: React.FC = () => {
         </div>
       </div>
 
-      <div className='flex w-full items-center gap-2 relative mt-2'>
+      <div className='flex w-full justify-end gap-2 mt-5 fixed bottom-[4rem] left-0 right-0 px-5 py-4 pb-0 bg-white md:relative md:bottom-[unset] md:p-0'>
         <StyledButton
           onClick={handlePrev}
           iconPosition='left'
           iconName='arrow-left'
+          className='w-1/2'
         >
           Previous
         </StyledButton>
-        <StyledButton onClick={handleConfirm} iconName='arrow-right'>
+        <StyledButton
+          onClick={handleConfirm}
+          iconName='arrow-right'
+          className='w-1/2'
+        >
           Confirm
         </StyledButton>
       </div>
