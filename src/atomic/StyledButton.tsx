@@ -15,6 +15,8 @@ interface StyledButtonProps
     | 'trash'
     | 'grid'
     | 'list'
+    | 'chevron-double-up'
+    | 'chevron-double-down'
 }
 
 const StyledButton: React.FC<StyledButtonProps> = ({
@@ -129,6 +131,40 @@ const StyledButton: React.FC<StyledButtonProps> = ({
         fill='currentColor'
       >
         <path d='M0 96c0-35.3 28.7-64 64-64h384c35.3 0 64 28.7 64 64v320c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V96zm64 0v64h64V96H64zm384 0H192v64h256V96zM64 224v64h64v-64H64zm384 0H192v64h256v-64zM64 352v64h64v-64H64zm384 0H192v64h256v-64z' />
+      </svg>
+    )}
+
+    {iconName === 'chevron-double-up' && (
+      <svg
+        fill='currentColor'
+        viewBox='0 0 16 16'
+        className='w-5 h-5 ml-0 group-hover:-ml-1 group-focus:-ml-1 transition-all'
+      >
+        <path
+          fillRule='evenodd'
+          d='M7.646 2.646a.5.5 0 01.708 0l6 6a.5.5 0 01-.708.708L8 3.707 2.354 9.354a.5.5 0 11-.708-.708l6-6z'
+        />
+        <path
+          fillRule='evenodd'
+          d='M7.646 6.646a.5.5 0 01.708 0l6 6a.5.5 0 01-.708.708L8 7.707l-5.646 5.647a.5.5 0 01-.708-.708l6-6z'
+        />
+      </svg>
+    )}
+
+    {iconName === 'chevron-double-down' && (
+      <svg
+        fill='currentColor'
+        viewBox='0 0 16 16'
+        className='w-5 h-5 ml-0 group-hover:-ml-1 group-focus:-ml-1 transition-all'
+      >
+        <path
+          fillRule='evenodd'
+          d='M1.646 6.646a.5.5 0 01.708 0L8 12.293l5.646-5.647a.5.5 0 01.708.708l-6 6a.5.5 0 01-.708 0l-6-6a.5.5 0 010-.708z'
+        />
+        <path
+          fillRule='evenodd'
+          d='M1.646 2.646a.5.5 0 01.708 0L8 8.293l5.646-5.647a.5.5 0 01.708.708l-6 6a.5.5 0 01-.708 0l-6-6a.5.5 0 010-.708z'
+        />
       </svg>
     )}
 
