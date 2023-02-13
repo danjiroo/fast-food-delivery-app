@@ -26,7 +26,7 @@ const OrderCompleted: React.FC = () => {
 
       <div className='flex w-full items-center gap-2 relative mt-12'>
         <StyledButton
-          className='w-[200px]'
+          className='w-full sm:w-[200px] md:w-full lg:w-1/2'
           onClick={handleReset}
           iconName='arrow-left'
           iconPosition='left'
