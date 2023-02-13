@@ -87,10 +87,15 @@ const StepFour: React.FC = () => {
           onClick={handlePrev}
           iconPosition='left'
           iconName='arrow-left'
+          className='w-full sm:w-[200px] md:w-full lg:w-1/2'
         >
           Previous
         </StyledButton>
-        <StyledButton onClick={handleConfirm} iconName='arrow-right'>
+        <StyledButton
+          onClick={handleConfirm}
+          iconName='arrow-right'
+          className='w-full sm:w-[200px] md:w-full lg:w-1/2'
+        >
           Confirm
         </StyledButton>
       </div>

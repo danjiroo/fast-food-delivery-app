@@ -107,7 +107,7 @@ const StepThree: React.FC = () => {
             </StyledParagraph>
           ) : null}
           <StyledButton
-            className='w-1/2'
+            className='w-full sm:w-[200px] md:w-full lg:w-1/2'
             onClick={handlePrev}
             iconName='arrow-left'
             iconPosition='left'
@@ -115,7 +115,7 @@ const StepThree: React.FC = () => {
             Previous
           </StyledButton>
           <StyledButton
-            className='w-1/2'
+            className='w-full sm:w-[200px] md:w-full lg:w-1/2'
             onClick={handleNext}
             iconName='arrow-right'
             iconPosition='right'

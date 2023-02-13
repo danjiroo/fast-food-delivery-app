@@ -86,7 +86,7 @@ const StepOne: React.FC = () => {
         <StyledButton
           iconName='arrow-right'
           iconPosition='right'
-          className='w-[200px] xl:w-full'
+          className='w-full sm:w-[200px] md:w-full lg:w-1/2'
           onClick={handleNext}
         >
           Proceed
