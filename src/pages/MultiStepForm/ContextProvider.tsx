@@ -22,7 +22,9 @@ const MultiStepFormProvider: React.FC<PropsWithChildren> = ({ children }) => {
     () => ({
       config,
       options,
-      context: {},
+      context: {
+        selectedNumberOfPeople: 1,
+      },
     }),
     []
   )

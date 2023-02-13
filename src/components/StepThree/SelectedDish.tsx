@@ -46,7 +46,7 @@ const SelectedDish: React.FC<SelectedDishProps> = ({
           name={value}
           type='number'
           value={servings}
-          disabled={!value}
+          //   disabled={!value}
           handleChange={(servings) => {
             if (servings === 0) {
               setRowDeleteComponent((prev: any) => ({

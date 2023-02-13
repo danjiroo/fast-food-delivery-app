@@ -34,7 +34,7 @@ const SelectedDishes: React.FC = () => {
     handleSelectDish(selectedOption)
   }
 
-  const handleServingsChange = ({ servings = 1, ...rest }: Dish) => {
+  const handleServingsChange = ({ servings = 0, ...rest }: Dish) => {
     handleSetNumberOfServings({
       ...rest,
       servings,
