@@ -17,7 +17,7 @@ const ContextConsumer: React.FC = () => {
   if (!providerState) return null
 
   return (
-    <div className='h-screen relative flex left justify-center w-full md:w-1/2 md:items-center'>
+    <div className='sticky top-[10vh] mt-[45vh] z-10 min-h-[calc(100vh-10vh)] h-screen flex left bg-white justify-center w-full md:relative md:top-0 md:mt-0 md:min-h-[unset] md:w-1/2 md:items-center'>
       {providerState.matches('loading') && 'Loading...'}
       {providerState.matches('ready.step_one') && <StepOne />}
       {providerState.matches('ready.step_two') && <StepTwo />}

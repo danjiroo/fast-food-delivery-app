@@ -30,7 +30,7 @@ const StepTwo: React.FC = () => {
   }
 
   return (
-    <div className='flex flex-col w-full p-5 xl:w-3/4'>
+    <div className='flex flex-col w-full p-5 pb-[10rem] xl:w-3/4'>
       <div>
         <StyledHeading
           level={1}
