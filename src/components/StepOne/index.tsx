@@ -52,7 +52,7 @@ const StepOne: React.FC = () => {
       </div>
 
       <div className='mt-8 flex gap-3 mb-5 justify-between sm:gap-12 lg:mt-12'>
-        <div className='w-7/12 sm:w-5/12'>
+        <div className='w-7/12 lg:w-1/2'>
           <StyledParagraph className='text-zinc-400 mb-2 text-ellipsis overflow-hidden whitespace-nowrap'>
             Please Select a Meal
           </StyledParagraph>
