@@ -37,6 +37,10 @@ export const config: MachineConfig<Context, StateSchema, MachineEvents> = {
                 actions: ['assignNoSelectedNumberOfPeople'],
               },
               {
+                cond: 'maxPeopleReached',
+                actions: ['assignMaxPeopleReachedError'],
+              },
+              {
                 target: '#step_two',
               },
             ],
@@ -104,9 +108,14 @@ export const config: MachineConfig<Context, StateSchema, MachineEvents> = {
             REMOVE_DISH: {
               actions: ['removeDish'],
             },
-            SET_NUMBER_OF_SERVINGS: {
-              actions: ['assignServings'],
-            },
+            SET_NUMBER_OF_SERVINGS: [
+              {
+                cond: 'hasZeroServings',
+              },
+              {
+                actions: ['assignServings'],
+              },
+            ],
             ADD_DISH_SELECTOR: {
               actions: ['addDishSelector'],
             },

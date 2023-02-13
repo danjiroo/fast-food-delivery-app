@@ -34,6 +34,10 @@ const StepOne: React.FC = () => {
   }
 
   const handleNumberOfPeopleChange = (input: number | string) => {
+    console.log(
+      'event.target.value event.target.valueevent.target.value::',
+      input
+    )
     handleSetNumberOfPeople(input)
   }
 
@@ -73,6 +77,7 @@ const StepOne: React.FC = () => {
             value={selectedNumberOfPeople ?? 1}
             disabled={selectedNumberOfPeople > 10 && selectedNumberOfPeople < 1}
             handleChange={handleNumberOfPeopleChange}
+            max={10}
           />
         </div>
       </div>

@@ -1,7 +1,7 @@
 /* eslint-disable arrow-body-style */
 import { MachineOptions } from 'xstate'
 
-import { Context, SetNumberOfPeopleEvent } from '../types'
+import { Context, SetNumberOfPeopleEvent, SetNumberOfServings } from '../types'
 import { actions } from './actions'
 import { services } from './services'
 
@@ -23,6 +23,8 @@ export const options: MachineOptions<Context, any> = {
 
       return !trimmedSelectedDishes.length
     },
+    hasZeroServings: (_, { payload }: SetNumberOfServings) =>
+      payload?.servings <= 0,
     notEnoughDishForPeople: ({
       selectedDishes = [],
       selectedNumberOfPeople = 0,

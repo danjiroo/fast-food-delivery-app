@@ -20,6 +20,7 @@ const StyledInput: React.FC<StyledInputProps> = ({
   const [inputValue, setInputValue] = useState<number>(value)
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
+    if (rest?.max && event.target.value > rest?.max) return
     setInputValue(parseInt(event.target.value))
     handleChange(parseInt(event.target.value))
   }
