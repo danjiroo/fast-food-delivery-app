@@ -1,4 +1,4 @@
-# CTW - Food App Assignment
+# Fast Food Delivery App
 > by: Danilo Quesada III
 
 ## Technologies used:
@@ -11,7 +11,7 @@
 
 ## Live Demo
 Deployed using Netlify.
-https://ctw-dan-exam.netlify.app/
+https://gutom-bai.netlify.app/
 
 ## Local Development
 ```
